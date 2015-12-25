@@ -1,123 +1,330 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Demo</title>
-    <script type="text/javascript">
-//<![CDATA[
-try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"9bc46525c1e1e85d082fab23e998ab1f",petok:"6c6f24a971e0dc22d57ed2db07f6109f758888ac-1444305265-1800",zone:"pastleo.me",rocket:"0",apps:{"ga_key":{"ua":"UA-57274726-1","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=e9627cd26a/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
-//]]>
-</script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script type="text/javascript">
-/* <![CDATA[ */
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-57274726-1']);
-_gaq.push(['_trackPageview']);
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
 
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/ninja/ninja-slider.css">
 
-(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
-/* ]]> */
-</script>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- 引入Ｊquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- 引入Ｊs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.js"></script>
+  <!-- 引入CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.6/semantic.min.css">
+  <script src="js/control.js"></script>
+    
+  <script>
+    $(document).ready(function() {
+      var source_id = '1DUzqYZ62fmsq_iSN5ZMza-aKeQa0jvJPtVG6YC0A6gg';
+      $.ajax({
+          url: 'https://spreadsheets.google.com/feeds/list/' + source_id + '/1/public/values?alt=json',
+          async: false,
+          type: 'GET',
+        })
+        .done(function(data) {
+          console.log("success");
+          console.log(data)
+          for (var i = 0 ; i < (data.feed.entry).length ; i++)
+          {
+            var text = data.feed.entry[i]['gsx$text']['$t'];
+            var img = data.feed.entry[i]['gsx$src']['$t'];
+            var photo_inner = $.parseHTML("<li><a class=\"ns-img\" href=\"" + img + "\"/></a><div class=\"caption\">"+ text +"</div></li>");
+            $('#inphoto').append(photo_inner);
+          }
+        })
+        .fail(function() {
+          console.log("Home photo error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
+      function getFieldValue(myform, fieldName) {
+        var text = myform.form('get value', fieldName);
+        if (text != "") return text;
+        else return "none";
+      }
+
+      $("#contactBtn").click(function() {
+        var form = $(".ui.form");  
+        var formData = {
+            yourName: getFieldValue(form, 'yourname'),
+            yourEmail: getFieldValue(form, 'youremail'),
+            tellMeWhat: getFieldValue(form, 'tellmewhat')
+        };
+        $.ajax({
+            url: 'https://script.google.com/macros/s/AKfycbz3j4I_OZvMMIFkHTxYNmCcEeihRWYQRnvGMNTC3idMCygV9w0/exec',
+            type: 'POST',
+            dataType: 'json',
+            data: formData,
+            success: function(){console.log('yes')},
+            fail: function(){console.log('no')}
+        });
+      });     
+    });
+  </script>
+  <script src="js/ninja/ninja-slider.js"></script>
+
 </head>
+<body>
+  <!-- 這裡放 menu bar (nav bar) -->
+  <div class="ui fixed grey inverted four item labeled icon menu">
+    <a id="mbtn1" class="item">
+      <i class="gamepad icon"></i>
+      Home
+    </a>
+    <a id="mbtn2" class="item" href="#selfIntroduction">
+      <i class="video camera icon"></i>
+      About me
+    </a>
+    <a id="mbtn3" class="item">
+      <i class="heartbeat icon"></i>
+      Story
+    </a>
+    <a id="mbtn4" class="item">
+      <i class="video play icon"></i>
+      Contact me
+    </a>
+  </div>
 
-<body style="padding-top: 70px;">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Doge</a>
-            </div>
-
-            <!-- collect the nav links, forms, and other content for toggling -->
-            <div >
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">@@<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">搜尋我</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">QQ<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Google</a></li>
-                            <li><a href="#">Yahoo</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">該打啥呢~</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">日常<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Eat Food</a></li>
-                            <li><a href="#">Sleep</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+  <div class="space"></div>
+  <!-- 這裡放 照片slide -->
+  <div id="photoSlide">
+    <div id="ninja-slider">
+      <div class="slider-inner">
+        <ul id="inphoto">
+        </ul>
+        <div class="navsWrapper">
+            <div id="ninja-slider-prev"></div>
+            <div id="ninja-slider-next"></div>
         </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <div class="container">
-        <div class="col-xs-12 col-sm-4">
-            <img src="../img/doge.gif" alt="" class="img-circle center-block img-responsive">
-        </div>
-        <div class="col-xs-12 col-sm-8">
-            <div class="jumbotron">
-                <h1>Hi, I am 學沈!</h1>
-                <p>ㄎㄎㄎㄎㄎ</p>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <table class="table table-responsive table-hover table-striped table-bordered">
-                <tr>
-                    <td>專長：</td>
-                    <td>打橋牌、羽球</td>
-                </tr>
-                <tr>
-                    <td>嗜好：</td>
-                    <td>寫程式</td>
-                </tr>
-                <tr>
-                    <td>技能：</td>
-                    <td>Carry同學</td>
-                </tr>
-                <tr>
-                    <td>大絕：</td>
-                    <td>熬夜</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <a href="https://www.facebook.com/VeryDoge" class="btn btn-default btn-lg btn-block">
-                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Facebook
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-4">
-            <a href="https://twitter.com/dogethedog" class="btn btn-default btn-lg btn-block">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Twitter
-            </a>
-        </div>
-        <div class="col-xs-6 col-sm-4">
-            <a href="https://github.com/thiderman/doge" class="btn btn-default btn-lg btn-block">
-                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Github
-            </a>
-        </div>
+      </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</body>
+  </div>
 
-</html>\
+  <!-- 這裡放 自我介紹 -->
+  <div id="selfIntroduction" class="section">
+    <div class="space"></div>
+
+    <div class="ui stackable three column grid container">
+      <!-- my photo card -->
+      <div id='myphoto' class="column">
+        <div class="ui centered card">
+          <div class="ui slide masked reveal image">
+            <img src="http://img1.ak.crunchyroll.com/i/spire4/820d572c413fdfdfad6c68838dd8cc581367525434_full.jpg" class="visible content">
+            <img src="http://pic.pimg.tw/yangzsjkx/1357492487-3175617884.jpg" class="hidden content">
+          </div>
+          <div class="content">
+            <a class="header">EastGeno</a>
+            <div class="meta">
+              <span class="date">A handsome guy!</span>
+            </div>
+          </div>
+          <div class="extra content">
+            <button id="showmybtn" class="ui grey basic button">
+              Show my detail
+            </button>
+              <!-- show modal -->
+            <div class="ui modal">
+              <i class="close icon"></i>
+              <div class="header">
+                My Picture
+              </div>
+              <div class="image content">
+                <div class="ui medium image">
+                  <img src="http://a.mangatown.com/store/manga/11912/021.4/compressed/fopm_021-004_065-066.jpg?v=51364057222">
+                </div>
+                <div class="description">
+                  <div class="ui header">嗨，我是劉冠閎  :D</div>
+                  <p>很高興你來觀賞我的網站，若你想更認識我的話，可以加我的FB或在網頁的最下端發送訊息給我。</p>
+                  <p>若你只是隨便瀏覽的話，非常的歡迎。</p>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="https://www.facebook.com/tim.liu.16547" target="_blank">
+                  <button class="ui facebook button">
+                    <i class="facebook icon"></i>
+                    Facebook
+                  </button>
+                </a>
+                <a href="https://plus.google.com/u/0/" target="_blank">
+                  <button class="ui google plus button">
+                    <i class="google plus icon"></i>
+                    Facebook
+                  </button>
+                </a>
+                <a href="https://github.com/tim54100" target="_blank">
+                  <button class="ui github button">
+                    <i class="github icon"></i>
+                    Github
+                  </button>
+                </a>
+                <div class="ui positive right labeled icon button">
+                  Yep, that's me
+                  <i class="thumbs outline up icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- show myskill-->
+      <div id='myskill' class="column">
+        <i class="big configure icon">Language</i>
+        <div style="height:5px;"></div>
+        <div id="p_java" class="ui yellow active progress">
+          <div class="bar" style="width:1%">
+            <div class="progress">1%</div>
+          </div>
+          <div class="label">Java</div>
+        </div>
+        <div id="p_c" class="ui yellow active progress">
+          <div class="bar" style="width:30%">
+            <div class="progress">30%</div>
+          </div>
+          <div class="label">C\C++</div>
+        </div>
+        <div id="p_javascript" class="ui olive active progress">
+          <div class="bar" style="width:5%">
+            <div class="progress">5%</div>
+          </div>
+          <div class="label">Javascript</div>
+        </div>
+        <div id="p_html" class="ui olive active progress">
+          <div class="bar" style="width:10%">
+            <div class="progress">10%</div>
+          </div>
+          <div class="label">Html</div>
+        </div>
+        <div id="p_jsp" class="ui olive active progress">
+          <div class="bar" style="width:5%">
+            <div class="progress">5%</div>
+          </div>
+          <div class="label">JSP</div>
+        </div>
+        <div id="p_markdown" class="ui olive active progress">
+          <div class="bar" style="width:1%">
+            <div class="progress">0%</div>
+          </div>
+          <div class="label">Markdown</div>
+        </div>
+        <div id="p_python" class="ui blue active progress">
+          <div class="bar" style="width:1%">
+            <div class="progress">0%</div>
+          </div>
+          <div class="label">Python</div>
+        </div>
+        <div id="p_php" class="ui blue active progress">
+          <div class="bar" style="width:0%">
+            <div class="progress">0%</div>
+          </div>
+          <div class="label">PHP</div>
+        </div>
+      </div>
+      <!-- show software-->
+      <div id='software' class="column">
+        <i class="big file icon">Software</i>
+        <div style="height:5px;"></div>
+        <div id="p_word" class="ui orange active progress">
+          <div class="bar" style="width:20%">
+            <div class="progress">20%</div>
+          </div>
+          <div class="label">Word</div>
+        </div>
+        <div id="p_ppt" class="ui orange active progress">
+          <div class="bar" style="width:10%">
+            <div class="progress">10%</div>
+          </div>
+          <div class="label">Power Point</div>
+        </div>
+        <div id="p_powerd" class="ui pink active progress">
+          <div class="bar" style="width:5%">
+            <div class="progress">5%</div>
+          </div>
+          <div class="label">Power Director</div>
+        </div>
+        <div id="p_imovie" class="ui pink active progress">
+          <div class="bar" style="width:5%">
+            <div class="progress">5%</div>
+          </div>
+          <div class="label">Imovie</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- 這裡放 timelinejs -->
+  <div id="timelinejs" class="section">
+    <iframe src='http:cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1JkTTEwpPRY-s7t1ptMH_cLg87bg99aTk9OJKtwwSplc&font=Default&lang=en&initial_zoom=2&height=650' width='100%' height='650' frameborder='0'></iframe>
+  </div>
+
+  <!-- 這裡放 聯絡我 -->
+  <div id="contactMe" class="section">
+    <div class="space"></div>
+    <div class="ui one column centered grid container">
+      <form class="ui large form segment">
+        <div class="field">
+          <label>Your name</label>
+          <input name="yourname" type="text">
+        </div>
+        <div class="field">
+          <label>Your email</label>
+          <input name="youremail" type="text">
+        </div>
+        <div class="field">
+          <label>You want to tell me what</label>
+          <textarea name="tellmewhat" type="text"></textarea>
+        </div>
+        <div id="contactBtn" class="ui olive submit button">Submit</div>
+        <div class="ui error message"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 這裡放 footer -->
+  <div class="ui green inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="ui stackable inverted divided grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">QR code</h4>
+          <div class="ui inverted link list">
+            
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">My Country</h4>
+          <div class="ui inverted link list">
+            <i class="massive tw flag"></i>
+            <p>Taiwan</p>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Occupation</h4>
+          <div class="ui inverted link list">
+            <p>University Student</p>
+            <a class="item" href="http://www.nchu.edu.tw/index1.php" target="_blnak">My school</a>
+            <a class="item" href="http://nchuit.cc/" target="_blnak">My group</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Thanks for your watching</h4>
+          <p>If you have any question,you can use contact me segment send message to me.In addition,you can be my friend through Facebook.</p>
+        </div>
+      </div>
+      <div class="ui inverted divider"></div>
+      <div class="ui horizontal inverted small divided link list">
+        <a class="item" href="http://semantic-ui.com/examples/sticky.html#">Designed by PeiYao Chang</a>
+        <a class="item" href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+    
+</body>
+</html>    
