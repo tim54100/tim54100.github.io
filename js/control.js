@@ -7,17 +7,17 @@ $(document).ready(function(){
   });
 
   //control scroll back to top button
-  // $("#gotopbutton").on({
-  //   mouseenter: function(){
-  //     $(this).addClass('animated shake');
-  //   },
-  //   mouseleave: function(){
-  //     $(this).removeClass('animated shake');
-  //   },
-  //   click: function(){
-  //     $('html,body').animate({scrollTop:$('#home').offset().top},600);
-  //   }
-  // });
+   $("#gotopbutton").on({
+     mouseenter: function(){
+       $(this).addClass('animated shake');
+     },
+     mouseleave: function(){
+       $(this).removeClass('animated shake');
+     },
+     click: function(){
+      $('html,body').animate({scrollTop:$('#home').offset().top},600);
+     }
+   });
 
   // show the modal
   $("#showmybtn").click(function(){
