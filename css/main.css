@@ -1,32 +1,22 @@
-.section{
-    padding: 20px 0;
+.lattice{
+	border-width: medium;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
 }
-
-.space {
-    height: 70px;
+h2{
+	text-align: center;
 }
-
-
-#selfIntroduction {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e2e2e2+0,dbdbdb+50,fefefe+100 */
-    background: rgb(226,226,226); /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(254,254,254,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(254,254,254,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(254,254,254,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    min-height: 100vh;
-    
+table{
+	position: absolute;
+	top: 20%;
+	left: 30%;
 }
-
-#photoSlide {
-    min-height: 100vh;
-    background-color: #FFF0F5;
-}
-
-
-#contactMe {
-    background : url('http://i.imgur.com/ctajkz4.jpg') center fixed no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    background-color: #FFF8DC;
+body{
+	margin-top: 1.5cm;
 }
