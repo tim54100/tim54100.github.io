@@ -3,6 +3,7 @@ const $ = require('gulp-load-plugins')();
 
 var ghPages = require('gulp-gh-pages');
 var pug = require('gulp-pug');
+var html = require('gulp-html');
 var del = require('del');
 var runSequence  = require('run-sequence');
 const paths = {
@@ -72,11 +73,8 @@ gulp.task('deploy', function() {
 });
 
 // pug
-gulp.task('pug', function(){
-  return gulp.src(['app/pug/*.pug'])
-    .pipe(pug({
-      pretty: true
-    }))
+gulp.task('index', function(){
+  return gulp.src(['dist/*.html'])
     .pipe(gulp.dest('build/'))
 
 });
@@ -101,5 +99,5 @@ gulp.task('watch',() => {
 gulp.task('default', ['html', 'less', 'css', 'scripts', 'webserver', 'watch'])
 
 gulp.task('build', function(){
-  runSequence('clean', ['pug'], 'deploy');
+  runSequence('clean', ['index'], 'deploy');
 });
