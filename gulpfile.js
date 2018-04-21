@@ -2,6 +2,9 @@ const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 
 var ghPages = require('gulp-gh-pages');
+var pug = require('gulp-pug');
+var del = require('del');
+var runSequence  = require('run-sequence');
 const paths = {
   src: {
     html: './src/html/*.html',
