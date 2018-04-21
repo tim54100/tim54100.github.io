@@ -3,7 +3,6 @@ const $ = require('gulp-load-plugins')();
 
 var ghPages = require('gulp-gh-pages');
 var pug = require('gulp-pug');
-var html = require('gulp-html');
 var del = require('del');
 var runSequence  = require('run-sequence');
 const paths = {
