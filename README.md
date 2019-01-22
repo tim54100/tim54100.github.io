@@ -1,6 +1,6 @@
 # A fake Battle City
 
-click (here)[http://tim54100.github.io/] to play
+click [here](http://tim54100.github.io/) to play
 
 Press W let tank move forward and S let tank back.
 
