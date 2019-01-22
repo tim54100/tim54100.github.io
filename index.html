@@ -30,11 +30,11 @@
             phaser.load.atlas('enemy', 'img/enemy-tanks.png', 'assets/tanks.json')
 
          },
-         removeLogo : function () {
+         /*removeLogo : function () {
 
             game.input.onUp.remove(this.removeLogo, this);
             this.logo.kill();
-         },
+         },*/
          fire :  function  () {
             var phaser = this.phaser;
             var turret = this.turret;
@@ -52,7 +52,7 @@
             var phaser = this.phaser;
 
             // The Logo
-            var logo = phaser.add.sprite(0, 0, 'logo');
+//             var logo = phaser.add.sprite(0, 0, 'logo');
 
             // Prepare how the world works
             phaser.physics.startSystem(Phaser.Physics.ARCADE);
@@ -98,12 +98,12 @@
 
             // set the world size according to the map
             layer.resizeWorld();
-            logo.x = phaser.scale.width / 2;
+            /*logo.x = phaser.scale.width / 2;
             logo.y = phaser.scale.height / 2;
             logo.anchor.setTo(0.5, 0.5);
             logo.fixedToCamera = true;
             logo.alpha = 0.75;
-            logo.bringToTop();
+            logo.bringToTop();*/
 
             // expose tank component to the game instance
             this.land = land;
@@ -111,14 +111,14 @@
             this.tank = tank;
             this.turret = turret;
             this.layer = layer;
-            this.logo = logo;
+            // this.logo = logo;
             this.shadow = shadow;
             // enable keyboard control
             this.cursors = phaser.input.keyboard.createCursorKeys();
 
             // the init speed of tank
             this.tank.currentSpeed = 0;
-            game.input.onUp.add(this.removeLogo, this);
+            // game.input.onUp.add(this.removeLogo, this);
             this.bullets =[];
             this.firetime = 0;
             this.enemies = [];
